@@ -22,7 +22,7 @@ for lr = 1:nlr
         net.params(net.layers(ii).paramIndexes(2)).weightDecay = 0;
     elseif lr==1
         net.addLayer(['conv',num2str(lr)],dagnn.Conv('size',opts.fn(lr,:),'pad', (opts.fn(lr,1)-1)/2,'stride', 1),...
-            {'input'},{['c',num2str(lr)]},{['c',num2str(lr),'f'],['c',num2str(lr),'b']});
+            {'bic'},{['c',num2str(lr)]},{['c',num2str(lr),'f'],['c',num2str(lr),'b']});
         ii = net.getLayerIndex(['conv',num2str(lr)]);
         net.params(net.layers(ii).paramIndexes(1)).learningRate = 1;
         net.params(net.layers(ii).paramIndexes(1)).weightDecay = 1;
@@ -67,7 +67,7 @@ if opts.numGpus > 0
     label = gpuArray(label) ;
     bic = gpuArray(bic) ;
 end
-inputs = {'input', input,'label', label,'bic',bic} ;
+inputs = {'label', label,'bic',bic} ;
 
 
 
