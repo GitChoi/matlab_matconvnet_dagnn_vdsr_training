@@ -30,7 +30,7 @@ for iter = 2:opt.numEpochs
         
         tic
         
-        net2.eval({'input',gpuArray(iml/255),'bic',gpuArray(imb/255)});
+        net2.eval({'bic',gpuArray(imb/255)});
         
         ims = net2.vars(net2.getVarIndex('prediction')).value;
         ims = gather(ims);
